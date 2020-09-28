@@ -53,7 +53,7 @@ namespace Chapter3 {
                 "Tokyo","New Delhi","Bangkok","London","Paris","Berlin","Cangerra","Hong Kong"
             };
 
-            Console.WriteLine("\n*********問題3-2-1*******************");
+            Console.WriteLine("\n\n\n*********問題3-2-1*******************");
             #region 問題3-2-1改
             do {
                 Console.Write("都市名を入力してください：");
@@ -89,8 +89,8 @@ namespace Chapter3 {
 
             Console.WriteLine("\n*********問題3-2-4*******************");
             #region 問題3-2-4
-            Console.WriteLine("「B」で始まる都市名の文字数は…");
-            names.Where(s => s.First() == 'B').Select(s => s.Length).ToList().ForEach(s => Console.Write($"{s}, "));
+            Console.Write("「B」で始まる都市名の文字数は…");
+            names.Where(s => s.First() == 'B').Select(s => s.Length).ToList().ForEach(s => Console.Write($"{s}文字, "));
             #endregion
 
 
