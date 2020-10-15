@@ -52,8 +52,20 @@ namespace Chapter6 {
             };
 
 
+            Console.Write("すべての書籍から「C#」の文字数…");
+            int count = 0;
+            foreach(var book in books.Where(x => x.Title.Contains("C#"))) {
+                for(int i = 0; i < book.Title.Length - 1; i++) {
+                    if((book.Title[i] == 'C') && (book.Title[i + 1] == '#')) {
+                        count++;
+                    }
+                }
+            }
+            Console.Write(count + "個");
+
+
             //6-2-1
-            Console.Write($"ワンダフル・C#ライフ…");
+            Console.Write($"\nワンダフル・C#ライフ…");
             foreach(var book in books.Where(x => x.Title == "ワンダフル・C#ライフ")) {
                 Console.WriteLine($"{book.Price}円 {book.Pages}ページ");
             }
@@ -84,7 +96,7 @@ namespace Chapter6 {
             Console.WriteLine("\n\n「C#」が含まれていて500ページ以下の本…");
             foreach(var book in books.Where(x => x.Title.Contains("C#") && x.Pages <= 500)) {
                 Console.WriteLine($"{book.Title}　");
-            } 
+            }
             #endregion
         }
     }
