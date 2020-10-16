@@ -9,37 +9,56 @@ namespace Chapter7 {
     class Program {
         static void Main(string[] args) {
 
-            var dict = new Dictionary<string, List<string>>();
-            var num = "1";
+            var text = "Cozy lummox gives smart squid who asks for job pen";
 
-            Console.WriteLine("**********************\n* 辞書登録プログラム *\n**********************");
-            
-            while(num != "3") {
-                Console.WriteLine("１．登録　２．内容を表示　３．終了");
-                Console.Write(">");
-                num = Console.ReadLine();
+            Exercis1_1(text);
 
-                if(num == "1") {
-                    Console.Write("KEYを入力：");
-                    var key = Console.ReadLine();
-                    Console.Write("VALUEを入力：");
-                    var value = Console.ReadLine();
+            //Exercis1_2(text);
 
-                    if(dict.ContainsKey(key)) {
-                        dict[key].Add(value);
+        }
+
+        //1-1
+        public static void Exercis1_1(string text) {
+            var dict = new Dictionary<char, int>();
+            //格納
+            foreach(var ch in text) {
+                char upc = char.ToUpper(ch);
+                if('A' <= upc && upc <= 'Z') {
+                    if(dict.ContainsKey(upc)) {
+                        dict[upc]++;
                     } else {
-                        dict[key] = new List<string> { value };
+                        dict[upc] = 1;
                     }
-                }else if(num == "2") {
-                    foreach(var item in dict) {
-                        foreach(var term in item.Value) {
-                            Console.WriteLine($"{item.Key}：{term}");
-                        }
-                    }
-                } else {
-                    continue;
                 }
             }
+
+            //出力            
+            foreach(var item in dict.OrderBy(x => x.Key)) {
+                Console.WriteLine($"'{item.Key}'：{item.Value}");
+            }
         }
+
+        //1-2
+        public static void Exercis1_2(string text) {
+            var sDict = new SortedDictionary<char, int>();
+            var chers = text.ToUpper().ToArray();
+            //格納
+            foreach(var ch in chers) {
+                if('A' <= ch && ch <= 'Z') {
+                    if(sDict.ContainsKey(ch)) {
+                        sDict[ch] += 1;
+                    } else {
+                        sDict[ch] = 1;
+                    }
+                }
+            }
+
+            //出力            
+            foreach(var item in sDict) {
+                Console.WriteLine($"'{item.Key}'：{item.Value}");
+            }
+        }
+
+
     }
 }
