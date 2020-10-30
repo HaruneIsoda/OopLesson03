@@ -2,17 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Section03 {
+namespace Chapter7 {
     // List 7-19
     // 略語と対応する日本語を管理するクラス
     class Abbreviations {
 
-        public int Count { get; private set; }
-
         private Dictionary<string, string> _dict = new Dictionary<string, string>();
+        //7-2-1
+        public int Count {
+            get {
+                return _dict.Count();
+            }
+        }
+
 
         // コンストラクタ
         public Abbreviations() {
@@ -40,14 +46,27 @@ namespace Section03 {
 
         // 日本語の位置を引数に与え、それが含まれる要素(Key,Value)をすべて取り出す
         public IEnumerable<KeyValuePair<string, string>> FindAll(string substring) {
-            foreach (var item in _dict) {
-                if (item.Value.Contains(substring))
+            foreach(var item in _dict) {
+                if(item.Value.Contains(substring))
                     yield return item;
             }
         }
 
-        public void remove() {
-            
+        //7-2-2
+        public bool Remove(string abbr) {
+            if(_dict.ContainsKey(abbr)) {
+                _dict.Remove(abbr);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //7-2-3
+        public void out3LettersKey() {
+            foreach(var item in _dict.Where(s => s.Key.Length == 3)) {
+                Console.WriteLine($"{item.Key}={item.Value}");
+            }
         }
     }
 }

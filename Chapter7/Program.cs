@@ -10,11 +10,59 @@ namespace Chapter7 {
         static void Main(string[] args) {
 
             var text = "Cozy lummox gives smart squid who asks for job pen";
-
-            Exercis1_1(text);
-
+            //Exercis1_1(text);
             //Exercis1_2(text);
 
+
+            // コンストラクタ呼び出し
+            var abbrs = new Abbreviations();
+
+            // Addメソッドの呼び出し例
+            abbrs.Add("IOC", "国際オリンピック委員会");
+            abbrs.Add("NPT", "核兵器不拡散条約");
+
+            //問題7-2-3
+            //Countプロパティを呼び出して数を出力させる
+            Console.WriteLine($"登録されている用語の数：{abbrs.Count}");
+            //Removeメソッドを呼び出して要素を削除する
+            Console.Write("削除する省略語を入力してください。：");
+            if(abbrs.Remove(Console.ReadLine())) {
+                Console.WriteLine("削除しました。");
+            } else {
+                Console.WriteLine("削除する省略語が見つかりませんでした。");
+            }
+            Console.WriteLine();
+            
+
+            // インデクサの利用例
+            var names = new[] { "WHO", "FIFA", "NPT", };
+            foreach(var name in names) {
+                var fullname = abbrs[name];
+                if(fullname == null)
+                    Console.WriteLine("{0}は見つかりません", name);
+                else
+                    Console.WriteLine("{0}={1}", name, fullname);
+            }
+            Console.WriteLine();
+
+            // ToAbbreviationメソッドの利用例
+            var japanese = "東南アジア諸国連合";
+            var abbreviation = abbrs.ToAbbreviation(japanese);
+            if(abbreviation == null)
+                Console.WriteLine("{0} は見つかりません", japanese);
+            else
+                Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviation);
+            Console.WriteLine();
+
+            // FindAllメソッドの利用例
+            foreach(var item in abbrs.FindAll("国際")) {
+                Console.WriteLine("{0}={1}", item.Key, item.Value);
+            }
+            Console.WriteLine();
+
+            //7-2-4
+            //Keyが三文字のものだけを表示
+            abbrs.out3LettersKey();
         }
 
         //1-1
@@ -59,6 +107,9 @@ namespace Chapter7 {
             }
         }
 
+        //2-1
+        public static void Exercis2_1() {
 
+        }
     }
 }
