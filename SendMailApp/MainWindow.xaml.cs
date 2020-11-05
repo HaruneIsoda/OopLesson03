@@ -39,8 +39,13 @@ namespace SendMailApp {
         //メール送信処理
         private void btOk_Click(object sender, RoutedEventArgs e) {
             try {
-                MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);
-
+                MailMessage msg = new MailMessage("ojsinfosys01@gmail.com",tbTo.Text);
+                if(tbCc.Text != "") {
+                    msg.CC.Add(tbCc.Text);
+                }
+                if(tbBcc.Text != "") {
+                    msg.Bcc.Add(tbBcc.Text);
+                }
                 msg.Subject = tbTitle.Text; //件名
                 msg.Body = tbBody.Text; //本文
 
