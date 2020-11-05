@@ -21,18 +21,18 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="件名："/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbTitle" Grid.Row="0" Grid.Column="1" Margin="5"/>
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="To："/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="5"/>
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Cc："/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="5"/>
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Bcc："/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5"/>
         <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="本文："/>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="5"/>
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
-            <Button Content="(｀・ω・´)" Width="100" Margin="0,0,10,0"/>
-            <Button Content="('・ω・｀)" Width="100"/>
+            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="0,0,10,0" Click="btCancel_Click"/>
+            <Button x:Name="btOk" Content="送信" Width="100" Click="btOk_Click"/>
         </StackPanel>
     </Grid>
 </Window>
