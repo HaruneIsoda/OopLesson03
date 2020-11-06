@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="メール送信アプリ" Height="500" Width="500" FontSize="20">
+        Title="メール送信アプリ" Height="500" Width="600" FontSize="20" Loaded="Window_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -34,5 +34,7 @@
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="0,0,10,0" Click="btCancel_Click"/>
             <Button x:Name="btOk" Content="送信" Width="100" Click="btOk_Click"/>
         </StackPanel>
+        <Button x:Name="btConfig" Grid.Row="5" Grid.Column="0" Content="設定" Margin="7"
+                Width="80" Click="btConfig_Click"/>
     </Grid>
 </Window>
