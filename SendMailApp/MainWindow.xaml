@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="メール送信アプリ" Height="500" Width="600" FontSize="20" Loaded="Window_Loaded">
+        Title="メール送信アプリ" Height="500" Width="600" FontSize="20"
+        Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
