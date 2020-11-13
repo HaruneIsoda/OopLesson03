@@ -110,11 +110,13 @@ namespace SendMailApp {
             IsTextChanged = false;
         }
 
+        //テキストチェンジ
         private void TextChangedCheck(object sender, TextChangedEventArgs e) {
             IsTextChanged = true;
         }
 
-        private void PasswordChangedCheck(object sender, RoutedEventArgs e) {
+        //テキストチェンジ（オーバーロード）
+        private void TextChangedCheck(object sender, RoutedEventArgs e) {
             IsTextChanged = true;
         }
     }

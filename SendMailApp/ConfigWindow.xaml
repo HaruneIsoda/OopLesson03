@@ -38,7 +38,7 @@
                 <TextBox x:Name="tbPort" Grid.Row="0" Grid.Column="3" Margin="5" Height="20" TextChanged="TextChangedCheck"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="パスワード："
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <PasswordBox x:Name="tbPassWord" Grid.Row="1" Grid.Column="3" Margin="5" Height="20" PasswordChanged="PasswordChangedCheck"/>
+                <PasswordBox x:Name="tbPassWord" Grid.Row="1" Grid.Column="3" Margin="5" Height="20" PasswordChanged="TextChangedCheck"/>
                 <CheckBox x:Name="cbSsl" Grid.Row="3" Grid.Column="3" Content="SSL有効"
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="メール送信アプリ" Height="500" Width="600" FontSize="20"
-        Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="メール送信アプリ" Height="500" Width="1000" FontSize="20"
+        Loaded="Window_Loaded" Closed="Window_Closed" Background="AliceBlue">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,6 +17,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -30,12 +32,16 @@
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Bcc："/>
         <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5"/>
         <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Text="本文："/>
-        <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="5"/>
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+        <TextBox x:Name="tbBody" Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="1" Margin="5"/>
+        <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="0,0,10,0" Click="btCancel_Click"/>
             <Button x:Name="btOk" Content="送信" Width="100" Click="btOk_Click"/>
         </StackPanel>
         <Button x:Name="btConfig" Grid.Row="5" Grid.Column="0" Content="設定" Margin="7"
                 Width="80" Click="btConfig_Click"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Text="添付ファイル："/>
+        <Button Grid.Row="2" Grid.Column="2" Content="追加" Margin="7"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="削除" Margin="7"/>
+        <ListBox Grid.RowSpan="4" Grid.Column="3" />
     </Grid>
 </Window>
