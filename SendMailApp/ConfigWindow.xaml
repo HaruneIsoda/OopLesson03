@@ -29,16 +29,16 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="SMTPサーバー：" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbSmtp" Grid.Row="0" Grid.Column="1" Margin="5" Height="20"/>
+                <TextBox x:Name="tbSmtp" Grid.Row="0" Grid.Column="1" Margin="5" Height="20" TextChanged="TextChangedCheck"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="ユーザー名："
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Margin="5" Height="20"/>
+                <TextBox x:Name="tbUserName" Grid.Row="1" Grid.Column="1" Margin="5" Height="20" TextChanged="TextChangedCheck"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="ポート：" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbPort" Grid.Row="0" Grid.Column="3" Margin="5" Height="20"/>
+                <TextBox x:Name="tbPort" Grid.Row="0" Grid.Column="3" Margin="5" Height="20" TextChanged="TextChangedCheck"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="パスワード："
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <PasswordBox x:Name="tbPassWord" Grid.Row="1" Grid.Column="3" Margin="5" Height="20"/>
+                <PasswordBox x:Name="tbPassWord" Grid.Row="1" Grid.Column="3" Margin="5" Height="20" PasswordChanged="PasswordChangedCheck"/>
                 <CheckBox x:Name="cbSsl" Grid.Row="3" Grid.Column="3" Content="SSL有効"
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
