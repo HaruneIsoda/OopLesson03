@@ -34,6 +34,16 @@ namespace SendMailApp {
 
         //適用ボタン
         private void btApply_Click(object sender, RoutedEventArgs e) {
+            while(tbSmtp.Text == "" || tbUserName.Text == "" || tbPassWord.Password == "" || tbPort.Text == "") {
+                MessageBox.Show("入力されていない項目があります", "エラー");
+                return;
+            }
+
+            UpdateInfo();
+        }
+
+        //情報更新
+        private void UpdateInfo() {
             (Config.GetInstance()).UpdateStatus(
                 tbSmtp.Text,
                 tbUserName.Text,
@@ -61,8 +71,26 @@ namespace SendMailApp {
 
         //キャンセルボタン
         private void btCancel_Click(object sender, RoutedEventArgs e) {
+            Config cf = Config.GetInstance();
+
+            if(
+                !(cf.Smtp == tbSmtp.Text &&
+                cf.Port.ToString().Equals(tbPort.Text) &&
+                cf.MailAddress == tbUserName.Text &&
+                cf.PassWord == tbPassWord.Password)) {
+                MessageBoxResult result = MessageBox.Show("設定内容が保存されていません。保存しますか？",
+                                                          "質問",
+                                                          MessageBoxButton.YesNoCancel);
+
+                if(result == MessageBoxResult.Yes) {
+                    UpdateInfo();
+                } else if(result == MessageBoxResult.No) {
+                    //何もしない
+                } else if(result == MessageBoxResult.Cancel) {
+                    return;
+                }
+            }
             this.Close();
         }
-
     }
 }

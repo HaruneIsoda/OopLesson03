@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -30,9 +31,9 @@ namespace SendMailApp {
         //送信完了イベント
         private void Sc_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
             if(e.Cancelled) {
-                MessageBox.Show("送信はキャンセルされました");
+                MessageBox.Show("送信はキャンセルされました","確認");
             } else {
-                MessageBox.Show(e.Error?.Message ?? "送信完了");
+                MessageBox.Show(e.Error?.Message ?? "送信完了","確認");
             }
         }
 
@@ -66,20 +67,35 @@ namespace SendMailApp {
             sc.SendAsyncCancel();
         }
 
-        //設定画面表示
+        //設定ボタン
         private void btConfig_Click(object sender, RoutedEventArgs e) {
+            ConfigWindowShow();
+        }
+
+        //設定画面表示
+        private static void ConfigWindowShow() {
             ConfigWindow configWindow = new ConfigWindow();
             configWindow.ShowDialog();
         }
 
         //メインウィンドウがロードされるタイミングで呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            (Config.GetInstance()).DeSerialise();
+            try {
+                (Config.GetInstance()).DeSerialise();
+            } catch(FileNotFoundException) {
+                ConfigWindowShow();
+            } catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //メインウィンドウが閉じるタイミングで呼び出される
         private void Window_Closed(object sender, EventArgs e) {
-            (Config.GetInstance()).Serialise();
+            try {
+                (Config.GetInstance()).Serialise();
+            } catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
