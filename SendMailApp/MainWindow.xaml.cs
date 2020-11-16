@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,23 +51,54 @@ namespace SendMailApp {
                 if(tbBcc.Text != "") {
                     msg.Bcc.Add(tbBcc.Text);
                 }
-                msg.Subject = tbTitle.Text; //件名
-                msg.Body = tbBody.Text; //本文
 
-                //添付ファイル
-                foreach(var file in fileListBox.Items) {
-                    msg.Attachments.Add(new Attachment(file.ToString(), MediaTypeNames.Application.Octet));
+                if(tbTitle.Text == "" || tbBody.Text == "") {
+                    if(questionMessage()) { //trueだったら格納
+                        msg.Subject = tbTitle.Text; //件名
+                        msg.Body = tbBody.Text; //本文
+                    } else {
+                        return;
+                    }
+
+
+                    //添付ファイル
+                    foreach(var file in fileListBox.Items) {
+                        msg.Attachments.Add(new Attachment(file.ToString(), MediaTypeNames.Application.Octet));
+                    }
+
+                    sc.Host = cf.Smtp; //SMTPサーバーの設定
+                    sc.Port = cf.Port;
+                    sc.EnableSsl = cf.Ssl;
+                    sc.Credentials = new NetworkCredential(cf.MailAddress, cf.PassWord);
+
+                    sc.SendMailAsync(msg);   //送信
                 }
-
-                sc.Host = cf.Smtp; //SMTPサーバーの設定
-                sc.Port = cf.Port;
-                sc.EnableSsl = cf.Ssl;
-                sc.Credentials = new NetworkCredential(cf.MailAddress, cf.PassWord);
-
-                sc.SendMailAsync(msg);   //送信
             } catch(Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+            
+        }
+
+        //件名と本文の入力確認
+        private bool questionMessage() {
+            string name = "";
+            if(tbTitle.Text == "" && tbBody.Text == "") {
+                name = "件名と本文";
+            } else if(tbTitle.Text == "") {
+                name = "件名";
+            } else if(tbBody.Text == "") {
+                name = "本文";
+            }
+
+            MessageBoxResult result = MessageBox.Show($"{name}が入力されていません。送信しますか？",
+                                                      "質問", MessageBoxButton.YesNo);
+            if(result == MessageBoxResult.Yes) {
+                return true;
+            } else if(result == MessageBoxResult.No) {
+                return false;
+            }
+
+            return true;
         }
 
         //送信キャンセル処理
@@ -129,7 +161,7 @@ namespace SendMailApp {
             if(sel == -1) {
                 return; //選択されていなかったらreturn
             } else {
-            fileListBox.Items.RemoveAt(sel);
+                fileListBox.Items.RemoveAt(sel);
             }
         }
     }
