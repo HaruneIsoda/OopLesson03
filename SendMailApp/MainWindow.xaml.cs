@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,9 +33,9 @@ namespace SendMailApp {
         //送信完了イベント
         private void Sc_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
             if(e.Cancelled) {
-                MessageBox.Show("送信はキャンセルされました","確認");
+                MessageBox.Show("送信はキャンセルされました", "確認");
             } else {
-                MessageBox.Show(e.Error?.Message ?? "送信完了","確認");
+                MessageBox.Show(e.Error?.Message ?? "送信完了", "確認");
             }
         }
 
@@ -50,6 +52,11 @@ namespace SendMailApp {
                 }
                 msg.Subject = tbTitle.Text; //件名
                 msg.Body = tbBody.Text; //本文
+
+                //添付ファイル
+                foreach(var file in fileListBox.Items) {
+                    msg.Attachments.Add(new Attachment(file.ToString(), MediaTypeNames.Application.Octet));
+                }
 
                 sc.Host = cf.Smtp; //SMTPサーバーの設定
                 sc.Port = cf.Port;
@@ -95,6 +102,34 @@ namespace SendMailApp {
                 (Config.GetInstance()).Serialise();
             } catch(Exception ex) {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        //ファイル追加ボタン
+        private void imageAddButton_Click(object sender, RoutedEventArgs e) {
+            var ofd = new OpenFileDialog();
+            ofd.FileName = "ファイルを選択してください";
+            //ofd.DefaultExt = ".jpg";
+            ofd.Filter = "すべてのファイル|*.*";
+
+            try {
+                bool? result = ofd.ShowDialog();
+
+                if(result == true) {
+                    fileListBox.Items.Add(ofd.FileName);
+                }
+            } catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //ファイル削除ボタン
+        private void imageDeleteButton_Click(object sender, RoutedEventArgs e) {
+            var sel = fileListBox.SelectedIndex;
+            if(sel == -1) {
+                return; //選択されていなかったらreturn
+            } else {
+            fileListBox.Items.RemoveAt(sel);
             }
         }
     }

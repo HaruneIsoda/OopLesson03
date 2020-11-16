@@ -18,9 +18,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="件名："/>
@@ -40,8 +40,8 @@
         <Button x:Name="btConfig" Grid.Row="5" Grid.Column="0" Content="設定" Margin="7"
                 Width="80" Click="btConfig_Click"/>
         <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Text="添付ファイル："/>
-        <Button Grid.Row="2" Grid.Column="2" Content="追加" Margin="7"/>
-        <Button Grid.Row="3" Grid.Column="2" Content="削除" Margin="7"/>
-        <ListBox Grid.RowSpan="4" Grid.Column="3" />
+        <Button x:Name="imageAddButton" Grid.Row="2" Grid.Column="2" Content="追加" Margin="7" Click="imageAddButton_Click" />
+        <Button x:Name="imageDeleteButton" Grid.Row="3" Grid.Column="2" Content="削除" Margin="7" Click="imageDeleteButton_Click"/>
+        <ListBox x:Name="fileListBox" Grid.RowSpan="4" Grid.Column="3" />
     </Grid>
 </Window>
