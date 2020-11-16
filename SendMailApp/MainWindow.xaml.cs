@@ -60,8 +60,7 @@ namespace SendMailApp {
                         return;
                     }
 
-
-                    //添付ファイル
+                    //添付ファイルの追加
                     foreach(var file in fileListBox.Items) {
                         msg.Attachments.Add(new Attachment(file.ToString(), MediaTypeNames.Application.Octet));
                     }
@@ -73,10 +72,12 @@ namespace SendMailApp {
 
                     sc.SendMailAsync(msg);   //送信
                 }
+            } catch(ArgumentException) {
+                MessageBox.Show("宛先を入力してください", "エラー");
             } catch(Exception ex) {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         //件名と本文の入力確認
@@ -91,7 +92,7 @@ namespace SendMailApp {
             }
 
             MessageBoxResult result = MessageBox.Show($"{name}が入力されていません。送信しますか？",
-                                                      "質問", MessageBoxButton.YesNo);
+                                                      "確認", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes) {
                 return true;
             } else if(result == MessageBoxResult.No) {
